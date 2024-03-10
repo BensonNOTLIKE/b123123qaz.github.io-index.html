@@ -1,0 +1,244 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    margin: 0;
+    flex-direction: column; /* 垂直居中时改为纵向排列 */
+}
+
+h1 {
+    text-align: center;
+    font-size: 4em; /* 使用相對字體大小 */
+    color: black;
+}
+
+p {
+    position: relative;
+    left: 150px; /* 改回原始位置 */
+    top: 100px; /* 改回原始位置 */
+    color: rgb(255, 4, 4);
+    font-size: 1.5em; 
+}
+
+#button1,
+#button2 {
+    transform: scale(1.5);
+    position: absolute;
+    top: 10px; /* 距離頂部的距離 */
+    text-decoration: underline; /* 添加底線樣式 */
+    background-color: white;/* 背底顏色*/
+    border: none; /* 移除边框 */
+    font-size: 1.2em;
+}
+
+#button1 {
+    right: 10px; /* 距離右側的距離 */
+}
+
+#button2 {
+    right: 100px; 
+}
+
+#userregister,
+#userlogin {
+    position: absolute;
+    top: 30%; /* 設定頂部為30% */
+    left: 45%; /* 設定左側為45% */
+    transform: scale(1.5); /* 调整缩放比例 */
+}
+
+#password {
+    margin-top: 10px; /* 调整顶部边距 */
+    margin-bottom: 10px; /* 调整底部边距 */
+}
+/* */
+/* 調整標籤間距 */
+label[for="password"] {
+    margin-right: 1px;
+}
+
+/* 表單提交按鈕樣式 */
+form input[type="submit"] {
+    display: inline-block;
+    margin-top: 20px;  
+    margin-right: 10px; 
+    margin-left: 10px; 
+}
+
+/* 標題樣式 */
+h3 {
+    text-align: center;
+    font-size: 44px;
+    color: black;
+    margin-top: -5px; 
+}
+
+/* 特定元素樣式 */
+.food,
+.humidity,
+.temperature {
+    transform: scale(1.5); /* 放大元素 */
+    position: absolute; /* 設置為絕對定位 */
+}
+/* 設定食物元素的位置 */
+.food { 
+    position: relative; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); /* 将元素的中心定位于其父元素的中心 */
+}
+
+/* 設定濕度元素的位置 */
+.humidity { 
+    position: relative; 
+    top: 150%; /* 调整垂直位置，以便与食物元素保持距离 */
+    left: 50%; 
+    transform: translateX(-50%); /* 将元素的水平位置居中 */
+}
+
+/* 設定溫度元素的位置 */
+.temperature { 
+    position: relative; 
+    top: 350%; /* 调整垂直位置，以便与濕度元素保持距离 */
+    left: 50%; 
+    transform: translateX(-50%); /* 将元素的水平位置居中 */
+}
+
+
+
+/* 表格元素樣式 */
+th,
+td,
+.label,
+p2 {
+    margin-right: 20px; /* 調整右邊距 */
+}
+
+
+/* 健康區段樣式 */
+.healthy {
+    display: flex;
+    flex-direction: row; /* 將方向改為水平 */
+    align-items: center;
+    justify-content: space-around;
+    height: 25vh;
+}
+
+.label {
+    font-weight: bold;
+    margin-right: 5px; /* 調整標籤之間的間距 */
+}
+
+.ai {
+    transform: scale(1.2);
+    margin-left: 55px;
+}
+
+/* 區段特定樣式 */
+.temperature,
+.humidity,
+.light,
+.food {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 溫度、濕度、光照、食物區段的表格樣式 */
+.temperature table,
+.humidity table,
+.light table,
+.food table {
+    display: flex;
+    align-items: center;
+}
+
+/* 可選: 調整表格元素間的間距 */
+.temperature td,
+.humidity td,
+.light td {
+    margin-right: 10px;
+}
+
+/* 可選: 特定按鈕的樣式 */
+#button8,
+#button9,
+#button10,
+#button11 {
+    margin-left: 10px;
+}
+
+/* 可選: 根據需要為其他按鈕添加樣式 */
+#button5,
+#button6,
+#button7,
+#button4 {
+    margin-left: 10px;
+}
+
+/**/
+/* 模態對話框樣式 */
+#myModal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+#myModal h2 {
+    margin-top: 0;
+}
+
+/* 第二個模態對話框樣式 */
+#myModal2 {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+#myModal2 h2 {
+    margin-top: 0;
+}
+
+/* 文本樣式 */
+p4 {
+    position: relative;
+    left: -10px; 
+    top: 100px; 
+    color: black;
+}
+
+p5 {
+    position: relative;
+    left: -160px; 
+    top: 150px; 
+    color: black;
+}
+
+p6 {
+    position: relative;
+    left: -250px; 
+    top: 200px; 
+    color: black;
+}
+
+p7 {
+    position: relative;
+    left: -330px; 
+    top: 250px; 
+    color: black;
+}
