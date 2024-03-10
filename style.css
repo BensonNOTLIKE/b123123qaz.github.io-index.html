@@ -74,46 +74,49 @@ h3 {
     margin-top: -5px; 
 }
 
-/* 特定元素樣式 */
-.food,
-.humidity,
-.temperature {
-    transform: scale(1.5); /* 放大元素 */
-    position: absolute; /* 設置為絕對定位 */
+.container {
+    position: relative;
+    padding-top: 20px; /* 顶部留出一些间距 */
+    padding-bottom: 20px; /* 底部留出一些间距 */
 }
-/* 設定食物元素的位置 */
+
+/* 设置食物元素的位置和大小 */
+/* 食物量样式 */
 .food { 
     position: relative; 
-    top: 50%; 
     left: 50%; 
-    transform: translate(-50%, -50%); /* 将元素的中心定位于其父元素的中心 */
+    transform: translate(-50%, -50%) scale(1.8); /* 将元素的中心定位于其父元素的中心，并放大1.2倍 */
 }
 
-/* 設定濕度元素的位置 */
+/* 设置濕度元素的位置和大小 */
 .humidity { 
     position: relative; 
-    top: 150%; /* 调整垂直位置，以便与食物元素保持距离 */
     left: 50%; 
-    transform: translateX(-50%); /* 将元素的水平位置居中 */
+    transform: translateX(-50%) scale(1.8); /* 将元素的水平位置居中并放大1.2倍 */
+    margin-top: 30px; /* 上方留出一些间距 */
 }
 
-/* 設定溫度元素的位置 */
+/* 设置溫度元素的位置和大小 */
 .temperature { 
     position: relative; 
-    top: 350%; /* 调整垂直位置，以便与濕度元素保持距离 */
     left: 50%; 
-    transform: translateX(-50%); /* 将元素的水平位置居中 */
+    transform: translateX(-50%) scale(1.8); /* 将元素的水平位置居中并放大1.2倍 */
+    margin-top: 20px; /* 上方留出一些间距 */
 }
 
-
-
-/* 表格元素樣式 */
-th,
-td,
-.label,
-p2 {
-    margin-right: 20px; /* 調整右邊距 */
+/* 食物量数字样式 */
+#food {
+    font-size: 24px; /* 设置字体大小 */
 }
+
+/* 食物量百分比特效 */
+#food::after {
+    content: '%'; /* 添加百分号内容 */
+    font-size: 12px; /* 设置百分号的字体大小 */
+    vertical-align: super; /* 垂直对齐到数字的上方 */
+    margin-left: 3px; /* 设置百分号与数字之间的间距 */
+}
+
 
 
 /* 健康區段樣式 */
