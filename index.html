@@ -11,38 +11,11 @@
 </head>
 <body>
     <div id="page1">
-        <h3>環境各項數值顯示</h3>
-        <div class="food">
-            <span class="label">食物量</span>
-                <table>
-                <tr>
-                    <td id="fd"></td>
-                    <button id="button3" onclick="switchfdsetp()">查看與設定</button>
-                    <button id="button4" onclick="feeding()">餵食1次</button>
-               
-                </tr>
-                </table>
-        </div>
-    <div class="temperature">
-            <span class="label">溫度</span>
-            <table>
-                <tr>
-                    <td id="tem"></td>
-                    <button id="button8" onclick="switchfdsetp()">查看與設定</button>
-                    <button id="button9" onclick="switchfdsetp()">開啟冷氣設定</button>
-                </tr>
-            </table>
-    </div>
-
-    <div class="humidity">
-            <span class="label">濕度</span>
-            <table>
-                <tr>
-                    <td id="hum"></td>
-                    <button id="button10" onclick="switchfdsetp()">查看與設定</button>
-                    <button id="button11" onclick="switchfdsetp()">開啟除濕機設定</button>
-                </tr>
-            </table>
+        <h1>寵物監控系統</h1>
+        <p>歡迎使用!</p>
+        <p id="infoDisplay"></p>
+        <button id="button1" onclick="showRegisterPage()">註冊</button>
+        <button id="button2" onclick="showLoginPage()">登入</button>
     </div>
     <!---------->
     <div id="userregister" style="display: none;">
@@ -89,7 +62,6 @@
                     <tr>
                         <td id="tem"></td>
                         <button id="button8" onclick="switchfdsetp()">查看與設定</button>
-                        <button id="button9" onclick="switchfdsetp()">開啟冷氣設定</button>
                     </tr>
                 </table>
         </div>
@@ -100,7 +72,6 @@
                     <tr>
                         <td id="hum"></td>
                         <button id="button10" onclick="switchfdsetp()">查看與設定</button>
-                        <button id="button11" onclick="switchfdsetp()">開啟除濕機設定</button>
                     </tr>
                 </table>
         </div>
