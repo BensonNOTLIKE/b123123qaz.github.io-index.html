@@ -80,7 +80,6 @@ h3 {
     padding-bottom: 20px; /* 底部留出一些间距 */
 }
 
-/* 设置食物元素的位置和大小 */
 /* 食物量样式 */
 .food { 
     position: relative; 
@@ -180,42 +179,6 @@ h3 {
     margin-left: 10px;
 }
 
-/**/
-/* 模態對話框樣式 */
-#myModal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
-
-#myModal h2 {
-    margin-top: 0;
-}
-
-/* 第二個模態對話框樣式 */
-#myModal2 {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
-
-#myModal2 h2 {
-    margin-top: 0;
-}
 
 /* 文本樣式 */
 p4 {
@@ -244,4 +207,41 @@ p7 {
     left: -330px; 
     top: 250px; 
     color: black;
+}
+/* 共同样式 */
+.warning {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.warning h2 {
+    margin-top: 0;
+    color: #721c24;
+}
+
+.warning p {
+    margin-bottom: 10px;
+    color: #721c24;
+}
+
+/* 关闭按钮样式 */
+.close-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    background-color: #c82333;
 }
