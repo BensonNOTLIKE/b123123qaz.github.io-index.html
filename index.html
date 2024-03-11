@@ -38,7 +38,7 @@
             <label for="loginPassword">密碼:</label>
             <input type="password" id="loginPassword" name="password"><br>
             <input type="submit" value="登入">
-            <input type="button" value="取消" onclick="switchpage2()">
+            <input type="button" value="取消" onclick="switchpage1()">
         </form>
     </div>
     
@@ -75,7 +75,26 @@
                     </tr>
                 </table>
         </div>
-
+        <button id="button11" onclick="switchpth()">切換至寵物健康</button>
+        <button id="button12" onclick="switchptv()">切換至寵物狀態</button>
+        <button id="button13" onclick="outaccount()">登出</button>
+        <div id="溫度警告" class="warning">
+            <h2>溫度過高</h2>
+            <button class="close-button" onclick="關閉視窗('溫度警告')">關閉</button>
+        </div>
+        
+        <div id="濕度警告" class="warning">
+            <h2>濕度過濕</h2>
+            <button class="close-button" onclick="關閉視窗('濕度警告')">關閉</button>
+        </div>
+        
+        <div id="食物警告" class="warning">
+            <h2>食物過少</h2>
+            <button class="close-button" onclick="關閉視窗('食物警告')">關閉</button>
+        </div>
+        
+    </div>
+    <div id="page3" style="display: none;">
         <div class="healthy">
             <span class="label">心律</span>
             <span id="htr"></span>
@@ -83,21 +102,19 @@
             <span id="ox"></span>
             <span class="label">步數</span>
             <span id="run"></span>
+            <button id="button14" onclick="back1()">切回環境</button>
         </div>
-            <div class="ai">
-                <span class="label">寵物狀態</span>
-                <p2>睡覺</p2>
-                <button id="button12">即時影像查詢</button>
-            </div>
-            
-            <div id="myModal">
-                <h2>溫度過高!</h2>
-                <button onclick="closeModal()">關閉</button>
-            </div>
-            <div id="myModal2">
-                <h2>濕度過高!</h2>
-                <button onclick="closeModal2()">關閉</button>
-            </div>
+    </div>
+    <div id="page4" style="display: none;">
+        <div class="healthy">
+            <span class="label">心2律</span>
+            <span id="htr"></span>
+            <span class="label">血2氧</span>
+            <span id="ox"></span>
+            <span class="label">步2數</span>
+            <span id="run"></span>
+            <button id="button15" onclick="back1()">切回環境</button>
+        </div>
     </div>
     <div id="fdsetp" style="display: none;">
         <label for="dropdown">歷年時間：</label>
@@ -108,10 +125,18 @@
         <P5 id="foodDistance"></p5>
         <p6 id="humidity"></p6>
         <p7 id="temperature"></p7>
-        <div id="counter">設定溫度提示數值：<span id="count">0°C</span></div>
-        <button onclick="increase()">增加</button>
-        <button onclick="decrease()">減少</button>     
-        <button onclick="back()">返回</button>
+        <div id="counter">設定溫度提示數值：<span id="c1"></span></div>
+        <button onclick="in1()">增加</button>
+        <button onclick="de1()">減少</button>   
+        <button onclick="back1()">返回</button>  
+        <div id="h-counter">設定濕度提示數值：<span id="c2"></span></div>
+        <button onclick="in2()">增加</button>
+        <button onclick="de2()">減少</button>
+        <button onclick="back2()">返回</button>
+        <div id="h-counter">設定食物提示數值：<span id="c3"></span></div>
+        <button onclick="in3()">增加</button>
+        <button onclick="de3()">減少</button>
+        <button onclick="back3()">返回</button>
         <div>已餵食次數：<span id="feeded"></span></div>
         <div>點心次數：<span id="pthfc"></span></div>
         <button onclick="increaseTouchfoodCount()">增加1次</button>
