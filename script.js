@@ -146,6 +146,12 @@ function loginUser() {
   const usernameL = document.getElementById("loginUsername").value;
   const passwordL = document.getElementById("loginPassword").value;
 
+  // 檢查是否輸入了帳號和密碼
+  if (!usernameL || !passwordL) {
+    alert("請輸入帳號和密碼。");
+    return false; // 防止表單提交
+  }
+
   // 使用Firebase資料庫引用
   const readRef = database.ref("User/user");
 
@@ -157,6 +163,10 @@ function loginUser() {
           // 登入成功
           alert("登入成功！");
           switchpage2();
+
+          // 清除帳號和密碼字段的值
+          document.getElementById("loginUsername").value = "";
+          document.getElementById("loginPassword").value = "";
       } else {
           // 登入失敗
           alert("帳號或密碼錯誤，請重新輸入。");
@@ -165,78 +175,184 @@ function loginUser() {
 
   return false; // 防止表單提交
 }
-//-------------------------------------------------------------------
 
-// 溫度過高提示
-const myModal = document.getElementById("myModal");
-let canOpenModal = true;
 
-function checkAndOpenModal(count, temperature) {
-    if (count === parseInt(temperature) && canOpenModal) {
-        openModal();
-        canOpenModal = false;
-    } else {
-        canOpenModal = true;
-    }
+function getC1FromFirebase() {
+    var database = firebase.database();
+    database.ref('htmlinput/twarn').once('value').then(function (snapshot) {
+        c1 = snapshot.val();
+        document.getElementById('c1').innerText = c1 + " °C";
+    });
 }
 
-
-setInterval(function () {
-    var count = parseInt(countElement.innerHTML);
-    var temperature = document.getElementById("tem").innerHTML;
-
-    checkAndOpenModal(count, temperature);
-}, 1000);
-//設定提示溫度跟調定
-function openModal() {
-  myModal.style.display = "block";
-  console.log("Modal opened!");
+function getC2FromFirebase() {
+    var database = firebase.database();
+    database.ref('htmlinput/hwarn').once('value').then(function (snapshot) {
+        c2 = snapshot.val();
+        document.getElementById('c2').innerText = c2 + " %";
+    });
 }
 
-function closeModal() {
-  myModal.style.display = "none";
+function getC3FromFirebase() {
+    var database = firebase.database();
+    database.ref('htmlinput/fwarn').once('value').then(function (snapshot) {
+        c3 = snapshot.val();
+        document.getElementById('c3').innerText = c3 + " %";
+    });
+}
+
+// 调用函数从 Firebase 获取初始值
+getC1FromFirebase();
+getC2FromFirebase();
+getC3FromFirebase();
+
+// 将 c1 上传到 writein/twarn
+function uploadC1ToFirebase() {
+    var database = firebase.database();
+    database.ref('htmlinput/twarn').set(c1);
+}
+
+// 将 c2 上传到 writein/hwarn
+function uploadC2ToFirebase() {
+    var database = firebase.database();
+    database.ref('htmlinput/hwarn').set(c2);
+}
+
+// 将 c3 上传到 writein/fwarn
+function uploadC3ToFirebase() {
+    var database = firebase.database();
+    database.ref('htmlinput/fwarn').set(c3);
+}
+
+// 在 in1, in2, in3, de1, de2, de3 函数中添加条件检查和提示信息
+function in1() {
+    c1++;
+    document.getElementById('c1').innerText = c1 + " °C";
+    uploadC1ToFirebase(); // 写入到 Firebase
+    checkWarnings();
+}
+
+function de1() {
+    c1--;
+    document.getElementById('c1').innerText = c1 + " °C";
+    uploadC1ToFirebase(); // 写入到 Firebase
+    checkWarnings();
+}
+
+function in2() {
+    c2++;
+    document.getElementById('c2').innerText = c2 + " %";
+    uploadC2ToFirebase(); // 写入到 Firebase
+    checkWarnings();
+}
+
+function de2() {
+    c2--;
+    document.getElementById('c2').innerText = c2 + " %";
+    uploadC2ToFirebase(); // 写入到 Firebase
+    checkWarnings();
+}
+
+function in3() {
+    c3++;
+    document.getElementById('c3').innerText = c3 + " %";
+    uploadC3ToFirebase(); // 写入到 Firebase
+    checkWarnings();
+}
+
+function de3() {
+    c3--;
+    document.getElementById('c3').innerText = c3 + " %";
+    uploadC3ToFirebase(); // 写入到 Firebase
+    checkWarnings();
 }
 //------
-var countElement = document.getElementById("count");
-function increase() {
-  var count = parseInt(countElement.innerHTML);
-  count++;
-  countElement.innerHTML = count + "°C";
-}
-function decrease() {
-  var count = parseInt(countElement.innerHTML);
-  if (count > 0) {
-    count--;
-    countElement.innerHTML = count + "°C";
-  }
+// 获取页面元素
+var fdElement = document.getElementById('fd');
+var temElement = document.getElementById('tem');
+var humElement = document.getElementById('hum');
+
+// 检查警告
+function showWarning(warningId) {
+  document.getElementById(warningId).style.display = 'block';
 }
 
-//-------------------------------------------------------------------
-//濕度過高提示
-const myModal2 = document.getElementById("myModal2");
-let canOpenModal2 = true;
+// 在 checkWarnings 函数中调用 showWarning 函数来显示警告
+// 定义定时器的时间间隔（以毫秒为单位，这里设置为每隔10秒检查一次）
+var intervalTime = 7500; // 10秒
 
-setInterval(function () {
-  const humidity = parseInt(document.getElementById("hum").innerText);
-  if (humidity >= 90 && canOpenModal2) {
-    openModal2();
-    canOpenModal2 = false;
+// 定时调用 checkWarnings() 函数
+setInterval(checkWarnings, intervalTime);
+
+// 显示警告的函数
+function showWarning(warningId) {
+    document.getElementById(warningId).style.display = 'block';
+}
+
+// 在 checkWarnings 函数中调用 showWarning 函数来显示警告
+// 定义延迟时间（以毫秒为单位）
+var delayTime = 15000; // 1秒
+
+// 定时调用 checkWarnings() 函数
+setInterval(checkWarnings, intervalTime);
+
+// 显示警告的函数（带有延迟）
+function showWarningWithDelay(warningId) {
+  setTimeout(function() {
+      document.getElementById(warningId).style.display = 'block';
+  }, delayTime);
+}
+
+// 在 checkWarnings 函数中调用 showWarningWithDelay 函数来显示警告（带有延迟）
+function checkWarnings() {
+  // 获取c1、c2和c3的值
+  var c1Value = c1;
+  var c2Value = c2;
+  var c3Value = c3;
+
+  // 获取fd、tem和hum的值
+  var fdValue = parseFloat(fdElement.innerText);
+  var temValue = parseFloat(temElement.innerText);
+  var humValue = parseFloat(humElement.innerText);
+
+  // 先检查溫度警告
+  if (temValue > c1Value) {
+      showWarningWithDelay('溫度警告');
   } else {
-    canOpenModal2 = true;
+      document.getElementById('溫度警告').style.display = 'none';
   }
-}, 1000);
 
-function openModal2() {
-  myModal2.style.display = "block";
-  console.log("Modal opened for high humidity!");
+  // 检查濕度警告，延迟显示
+  if (humValue > c2Value) {
+      setTimeout(function() {
+          showWarningWithDelay('濕度警告');
+      }, delayTime);
+  } else {
+      document.getElementById('濕度警告').style.display = 'none';
+  }
+
+  // 最后检查食物警告，延迟显示
+  if (fdValue < c3Value) {
+      setTimeout(function() {
+          showWarningWithDelay('食物警告');
+      }, delayTime*1.5 ); // 延迟两倍的时间
+  } else {
+      document.getElementById('食物警告').style.display = 'none';
+  }
 }
 
-function closeModal2() {
-  myModal2.style.display = "none";
-}
+// 页面加载时立即执行一次检查
+checkWarnings();
 
+// 定时调用 checkWarnings() 函数
+setInterval(checkWarnings, intervalTime);
+
+// 页面加载时立即执行一次检查
+checkWarnings();
+
+// 定时调用 checkWarnings() 函数
+setInterval(checkWarnings, intervalTime);
 //-------------------------------------------------------------------
-
 //查詢
 const dropdown = document.getElementById("dropdown");
 const timeDropdown = document.getElementById("timeDropdown");
@@ -353,9 +469,48 @@ function switchtmsetp() {
   document.getElementById("userlogin").style.display = "none";
   document.getElementById("userregister").style.display = "none";
 }
-function back() {
+// 返回到page2
+function back1() {
   document.getElementById("page2").style.display = "block";
   document.getElementById("userlogin").style.display = "none";
   document.getElementById("userregister").style.display = "none";
   document.getElementById("fdsetp").style.display = "none";
+  document.getElementById("page3").style.display = "none";
+  document.getElementById("page4").style.display = "none";
+}
+
+function back2() {
+  document.getElementById("page2").style.display = "block";
+  document.getElementById("userlogin").style.display = "none";
+  document.getElementById("userregister").style.display = "none";
+  document.getElementById("fdsetp").style.display = "none";
+}
+function back3() {
+  document.getElementById("page2").style.display = "block";
+  document.getElementById("userlogin").style.display = "none";
+  document.getElementById("userregister").style.display = "none";
+  document.getElementById("fdsetp").style.display = "none";
+}
+function switchpth(){
+  document.getElementById("page3").style.display = "block";
+  document.getElementById("page2").style.display = "none";
+
+}
+function switchptv(){
+  document.getElementById("page4").style.display = "block";
+  document.getElementById("page2").style.display = "none";
+
+}
+function outaccount(){
+  document.getElementById("page1").style.display = "block";
+  document.getElementById("page2").style.display = "none";
+  document.getElementById("userlogin").style.display = "none";
+  document.getElementById("userregister").style.display = "none";
+  document.getElementById("fdsetp").style.display = "none";
+  document.getElementById("page3").style.display = "none";
+  document.getElementById("page4").style.display = "none";
+}
+
+function 關閉視窗(id) {
+  document.getElementById(id).style.display = "none";
 }
