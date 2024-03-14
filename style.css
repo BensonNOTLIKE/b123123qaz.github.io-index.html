@@ -5,6 +5,7 @@ body {
     min-height: 50vh;
     margin: 0;
     flex-direction: column; /* 垂直居中时改为纵向排列 */
+    position: relative; /* 使得子元素以 body 为相对定位的父元素 */
 }
 
 h1 {
@@ -15,8 +16,8 @@ h1 {
 
 p {
     position: relative;
-    left: 150px; /* 改回原始位置 */
-    top: 100px; /* 改回原始位置 */
+    left: 35%; /* 使用百分比单位 */
+    top: 40%; /* 使用百分比单位 */
     color: rgb(255, 4, 4);
     font-size: 1.5em; 
 }
@@ -37,21 +38,22 @@ p {
 }
 
 #button2 {
-    right: 100px; 
+    right: 110px; /* 调整 button2 的位置 */
 }
 
 #userregister,
 #userlogin {
     position: absolute;
-    top: 30%; /* 設定頂部為30% */
-    left: 45%; /* 設定左側為45% */
-    transform: scale(1.5); /* 调整缩放比例 */
+    top: 60%; /* 将元素定位在父元素的垂直中间 */
+    left: 50%; /* 将元素定位在父元素的水平中间 */
+    transform: translate(-50%, -50%) scale(1.5); /* 将元素居中，并放大1.5倍 */
 }
 
 #password {
     margin-top: 10px; /* 调整顶部边距 */
     margin-bottom: 10px; /* 调整底部边距 */
 }
+
 /* */
 /* 調整標籤間距 */
 label[for="password"] {
@@ -59,11 +61,15 @@ label[for="password"] {
 }
 
 /* 表單提交按鈕樣式 */
+form {
+    position: relative; /* 使表单成为定位上下文 */
+}
+
 form input[type="submit"] {
     display: inline-block;
-    margin-top: 20px;  
-    margin-right: 10px; 
-    margin-left: 10px; 
+    margin-top: 20px;
+    margin-right: 15%; /* 适当调整百分比值以符合您的布局 */
+    margin-left: 30%; /* 适当调整百分比值以符合您的布局 */
 }
 
 /* 標題樣式 */
@@ -155,6 +161,25 @@ h3 {
     display: flex;
     align-items: center;
 }
+#button11 {
+    position: absolute;
+    left: calc(46% - 101px); /* 40px × 2 */
+    top: 90%;
+    transform: scale(1.1);
+}
+
+#button12 {
+    position: absolute;
+    left: calc(62% - 80px); /* 40px × 2 */
+    top: 90%; 
+    transform: scale(1.1);
+}
+#button13 {
+    position: absolute;
+    left: calc(100% - 90px); /* 70px × 2 */
+    top: 5%; 
+    transform: scale(1.2);
+}
 
 /* 可選: 調整表格元素間的間距 */
 .temperature td,
@@ -166,20 +191,55 @@ h3 {
 /* 可選: 特定按鈕的樣式 */
 #button8,
 #button9,
-#button10,
-#button11 {
+#button10 {
     margin-left: 10px;
 }
 
 /* 可選: 根據需要為其他按鈕添加樣式 */
-#button5,
+
 #button6,
-#button7,
-#button4 {
+#button7 {
     margin-left: 10px;
 }
 
+#button4 {
+    position: relative;
+    /* 设置按钮的位置 */
+    top: 90%; /* 将按钮相对于父元素下移 */
+    left: 0.5%; /* 距离父元素左侧的距离 */
+}
 
+#button14 {
+    position: absolute;
+    /* 设置按钮的位置 */
+    top: 60%;
+    left: 50%; /* 距离父元素左侧的距离20像素 */
+    transform: scale(1.2);
+}
+#button15 {
+    position: absolute;
+    /* 设置按钮的位置 */
+    top: 120%;
+    left: 47%; /* 距离父元素左侧的距离20像素 */
+    transform: scale(1.2);
+}
+#button16 {
+    position: absolute;
+    /* 设置按钮的位置 */
+    top: 100%;
+    left: 48%; /* 距离父元素左侧的距离20像素 */
+    transform: scale(1.2);
+}
+    #AIE,
+    #staa {
+        display: inline-block; /* 讓元素在同一行顯示 */
+    }
+
+    #sta {
+        
+        display: block; /* 讓整個 #sta 元素成為區塊元素 */
+        transform: scale(1.1);
+    }
 /* 文本樣式 */
 p4 {
     position: relative;
@@ -244,4 +304,11 @@ p7 {
 
 .close-button:hover {
     background-color: #c82333;
+}
+
+#selectedResult {
+    position: absolute;
+    left: calc(35% - 51px); /* 40px × 2 */
+    top: 70%;
+    transform: scale(1.1);
 }
