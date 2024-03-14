@@ -16,6 +16,7 @@ const database = firebase.database();
 // Firebase 數據庫引用
 
 const loadRef = database.ref('upload');
+const AIRef = database.ref('AI');
 const petRef = database.ref('pet');
 
 // DOM 元素
@@ -25,6 +26,15 @@ const humE = document.getElementById("hum");
 const htrE = document.getElementById("htr");
 const oxE = document.getElementById("ox");
 const runE = document.getElementById("run");
+const AIE = document.getElementById("AIE"); // 修改為正確的 ID
+const barkE = document.getElementById("bark"); // 修改為正確的 ID
+const bark2E = document.getElementById("bark2"); // 修改為正確的 ID
+const sitE = document.getElementById("sit"); // 修改為正確的 ID
+const sit2E = document.getElementById("sit2"); // 修改為正確的 ID
+const sleepE = document.getElementById("sleep"); // 修改為正確的 ID
+const sleep2E = document.getElementById("sleep2"); // 修改為正確的 ID
+const standE = document.getElementById("stand"); // 修改為正確的 ID
+const stand2E = document.getElementById("stand2"); // 修改為正確的 ID
 
 // 即時數據抓取
 loadRef.on('value', function(snapshot) {
@@ -39,6 +49,40 @@ petRef.on('value', function(snapshot) {
   htrE.innerText = data['heartbeat'];  // 更新血氧
   oxE.innerText = data['bloodO2'];     // 更新心跳
   runE.innerText = data['walk'];
+});
+
+AIRef.on('value', function(snapshot) {
+  const data = snapshot.val();
+  let actionRealtime = data['detection_results']['action_realtime'];
+  barkE.innerText = data['detection_results']['bark']['last accumulated time']+"時間";
+  bark2E.innerText = data['detection_results']['bark']['latest accumulated time']+ "時間";
+  sitE.innerText = data['detection_results']['sit']['last accumulated time']+"時間";
+  sit2E.innerText = data['detection_results']['sit']['latest accumulated time']+ "時間";
+  sleepE.innerText = data['detection_results']['sleep']['last accumulated time']+"時間";
+  sleep2E.innerText = data['detection_results']['sleep']['latest accumulated time']+ "時間";
+  standE.innerText = data['detection_results']['stand']['last accumulated time']+"時間";
+  stand2E.innerText = data['detection_results']['stand']['latest accumulated time']+ "時間";
+  // 使用正則表達式提取出動作和時間
+  const match = actionRealtime.match(/(\w+)_(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})/);
+
+  if (match) {
+    const action = match[1]; // 提取動作
+    const time = match[2];   // 提取時間
+
+    // 動作到中文的對應詞彙字典
+    const dictionary = {
+      "sleep": "睡眠",
+      // 其他需要轉換的動作可以在這裡添加
+    };
+
+    // 將動作轉換為中文
+    actionRealtime = dictionary[action] || action;
+    
+    // 顯示動作和時間
+    AIE.innerText = `${actionRealtime} (${time})`;  // 更新中文結果
+  } else {
+    AIE.innerText = actionRealtime; // 若未匹配到，則保持原始值
+  }
 });
 
 // 函数用于更新特定元素的值和数据库中的值
@@ -332,7 +376,7 @@ function checkWarnings() {
   }
 
   // 最后检查食物警告，延迟显示
-  if (fdValue < c3Value) {
+  if ( c3Value > fdValue ) {
       setTimeout(function() {
           showWarningWithDelay('食物警告');
       }, delayTime*1.5 ); // 延迟两倍的时间
@@ -436,7 +480,15 @@ historyRef.once('value')
   .catch(function (error) {
     console.error('獲取歷史日期時出錯：', error);
   });
-
+//---------
+function submitForm() {
+  var url = document.getElementById("urlInput").value;
+  if (url.trim() !== "") {
+    window.location.href = url;
+    return false;
+  }
+  return false; // 防止表单提交
+}
 // 登入頁面
 function showLoginPage() {
   document.getElementById("page1").style.display = "none";
@@ -468,24 +520,56 @@ function switchtmsetp() {
   document.getElementById("page2").style.display = "none";
   document.getElementById("userlogin").style.display = "none";
   document.getElementById("userregister").style.display = "none";
+  
 }
-// 返回到page2
+function switchmsetp() {
+  document.getElementById("hmsetp").style.display = "block";
+  document.getElementById("fdsetp").style.display = "none";
+  document.getElementById("page2").style.display = "none";
+  document.getElementById("userlogin").style.display = "none";
+  document.getElementById("userregister").style.display = "none";
+}
+function swhistory() {
+  document.getElementById("history").style.display = "block";
+  document.getElementById("fdsetp").style.display = "none";
+  document.getElementById("page2").style.display = "none";
+  document.getElementById("userlogin").style.display = "none";
+  document.getElementById("userregister").style.display = "none";
+}
 function back1() {
   document.getElementById("page2").style.display = "block";
   document.getElementById("userlogin").style.display = "none";
   document.getElementById("userregister").style.display = "none";
-  document.getElementById("fdsetp").style.display = "none";
-  document.getElementById("page3").style.display = "none";
-  document.getElementById("page4").style.display = "none";
+  document.getElementById("history").style.display = "none";
 }
+
 
 function back2() {
   document.getElementById("page2").style.display = "block";
   document.getElementById("userlogin").style.display = "none";
   document.getElementById("userregister").style.display = "none";
-  document.getElementById("fdsetp").style.display = "none";
+  document.getElementById("hmsetp").style.display = "none";
+  document.getElementById("page3").style.display = "none";
 }
 function back3() {
+  document.getElementById("page2").style.display = "block";
+  document.getElementById("userlogin").style.display = "none";
+  document.getElementById("userregister").style.display = "none";
+  document.getElementById("sta").style.display = "none";
+}
+function back4() {
+  document.getElementById("page2").style.display = "block";
+  document.getElementById("userlogin").style.display = "none";
+  document.getElementById("userregister").style.display = "none";
+  document.getElementById("tmsetp").style.display = "none";
+}
+function back5() {
+  document.getElementById("page2").style.display = "block";
+  document.getElementById("userlogin").style.display = "none";
+  document.getElementById("userregister").style.display = "none";
+  document.getElementById("hmsetp").style.display = "none";
+}
+function back6() {
   document.getElementById("page2").style.display = "block";
   document.getElementById("userlogin").style.display = "none";
   document.getElementById("userregister").style.display = "none";
@@ -497,7 +581,7 @@ function switchpth(){
 
 }
 function switchptv(){
-  document.getElementById("page4").style.display = "block";
+  document.getElementById("sta").style.display = "block";
   document.getElementById("page2").style.display = "none";
 
 }
