@@ -17,9 +17,10 @@
         <button id="button1" onclick="showRegisterPage()">註冊</button>
         <button id="button2" onclick="showLoginPage()">登入</button>
     </div>
+    </div>
     <!---------->
     <div id="userregister" style="display: none;">
-        <h2>註冊新使用者</h2>
+        <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;註冊新使用者</h2>
         <form id="registrationForm" onsubmit="return registerUser();">
             <label for="registerUsername">帳號:</label>
             <input type="text" id="registerUsername" name="username1" required><br>
@@ -38,7 +39,7 @@
             <label for="loginPassword">密碼:</label>
             <input type="password" id="loginPassword" name="password"><br>
             <input type="submit" value="登入">
-            <input type="button" value="取消" onclick="switchpage1()">
+            <input type="button" value="取消" onclick="switchpage2()">
         </form>
     </div>
     
@@ -50,7 +51,7 @@
                     <table>
                     <tr>
                         <td id="fd"></td>
-                        <button id="button3" onclick="switchfdsetp()">查看與設定</button>
+                        <button id="button3" onclick="switchfdsetp()">設定提示值</button>
                         <button id="button4" onclick="feeding()">餵食1次</button>
                    
                     </tr>
@@ -61,7 +62,7 @@
                 <table>
                     <tr>
                         <td id="tem"></td>
-                        <button id="button8" onclick="switchfdsetp()">查看與設定</button>
+                        <button id="button8" onclick="switchtmsetp()">設定提示值</button>
                     </tr>
                 </table>
         </div>
@@ -71,13 +72,14 @@
                 <table>
                     <tr>
                         <td id="hum"></td>
-                        <button id="button10" onclick="switchfdsetp()">查看與設定</button>
+                        <button id="button10" onclick="switchmsetp()">設定提示值</button>
                     </tr>
                 </table>
         </div>
         <button id="button11" onclick="switchpth()">切換至寵物健康</button>
         <button id="button12" onclick="switchptv()">切換至寵物狀態</button>
         <button id="button13" onclick="outaccount()">登出</button>
+        <button id="button16" onclick="swhistory()">歷史紀錄</button>
         <div id="溫度警告" class="warning">
             <h2>溫度過高</h2>
             <button class="close-button" onclick="關閉視窗('溫度警告')">關閉</button>
@@ -91,32 +93,10 @@
         <div id="食物警告" class="warning">
             <h2>食物過少</h2>
             <button class="close-button" onclick="關閉視窗('食物警告')">關閉</button>
-        </div>
-        
-    </div>
-    <div id="page3" style="display: none;">
-        <div class="healthy">
-            <span class="label">心律</span>
-            <span id="htr"></span>
-            <span class="label">血氧</span>
-            <span id="ox"></span>
-            <span class="label">步數</span>
-            <span id="run"></span>
-            <button id="button14" onclick="back1()">切回環境</button>
-        </div>
-    </div>
-    <div id="page4" style="display: none;">
-        <div class="healthy">
-            <span class="label">心2律</span>
-            <span id="htr"></span>
-            <span class="label">血2氧</span>
-            <span id="ox"></span>
-            <span class="label">步2數</span>
-            <span id="run"></span>
-            <button id="button15" onclick="back1()">切回環境</button>
-        </div>
-    </div>
-    <div id="fdsetp" style="display: none;">
+        </div>     
+    </div> 
+    <!---------->
+    <div id="history" style="display: none;">       
         <label for="dropdown">歷年時間：</label>
         <select id="dropdown" name="dropdown"></select>
         <select id="timeDropdown">
@@ -125,18 +105,52 @@
         <P5 id="foodDistance"></p5>
         <p6 id="humidity"></p6>
         <p7 id="temperature"></p7>
-        <div id="counter">設定溫度提示數值：<span id="c1"></span></div>
-        <button onclick="in1()">增加</button>
-        <button onclick="de1()">減少</button>   
-        <button onclick="back1()">返回</button>  
-        <div id="h-counter">設定濕度提示數值：<span id="c2"></span></div>
-        <button onclick="in2()">增加</button>
-        <button onclick="de2()">減少</button>
-        <button onclick="back2()">返回</button>
-        <div id="h-counter">設定食物提示數值：<span id="c3"></span></div>
+        <button id="button16" onclick="back1()">切回環境</button>
+    </div>
+    <!---------->
+    <div id="page3" style="display: none;">
+        <div id="healthy">
+            <span id="label1">心律</span>
+            <span id="htr"></span>
+            <span id="label2">血氧</span>
+            <span id="ox"></span>
+            <span id="label3">步數</span>
+            <span id="run"></span>
+            <button id="button14" onclick="back2()">切回環境</button>
+        </div>
+    </div>
+    <!---------->
+    <div id="sta"style="display: none;">
+        <span id="staa">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp當前狀態:</span>
+        <span id="AIE"></span><br>
+        <span id="stab">(叫)當前保持多久</span>
+        <span id="bark"></span>
+        <span id="stac">&nbsp;&nbsp;&nbsp;一天總共時間為</span>
+        <span id="bark2"></span><br>
+        <span id="stad">(坐)當前保持多久</span>
+        <span id="sit"></span>
+        <span id="stae">&nbsp;&nbsp;&nbsp;一天總共時間為</span>
+        <span id="sit2"></span><br>
+        <span id="staf">(睡)當前保持多久</span>
+        <span id="sleep"></span>
+        <span id="stag">&nbsp;&nbsp;&nbsp;一天總共時間為</span>
+        <span id="sleep2"></span><br>
+        <span id="stah">(睡)當前保持多久</span>
+        <span id="stand"></span>
+        <span id="stag">&nbsp;&nbsp;&nbsp;一天總共時間為</span>
+        <span id="stand2"></span><br>
+        <button id="button15" onclick="back3()">切回環境</button>
+        <form id="urlForm" onsubmit="return submitForm()">
+            <label for="urlInput">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp貼上即可查看寵物：</label>
+            <input type="text" id="urlInput" name="urlInput" required>
+    </div>
+    <!---------->
+    <div id="fdsetp" style="display: none;">
+        
+        <div id="f-counter">設定食物提示數值：<span id="c3"></span></div>
         <button onclick="in3()">增加</button>
         <button onclick="de3()">減少</button>
-        <button onclick="back3()">返回</button>
+        <button onclick="back6()">返回</button>
         <div>已餵食次數：<span id="feeded"></span></div>
         <div>點心次數：<span id="pthfc"></span></div>
         <button onclick="increaseTouchfoodCount()">增加1次</button>
@@ -158,8 +172,22 @@
                 <th>點</th>
             </div>
         </form>
-        
     </div>
+    <!---------->
+    <div id="tmsetp" style="display: none;">
+        <div id="t-counter">設定溫度提示數值：<span id="c1"></span></div>
+        <button onclick="in1()">增加</button>
+        <button onclick="de1()">減少</button>   
+        <button onclick="back4()">返回</button>
+    </div>
+    <!---------->
+    <div id="hmsetp" style="display: none;">
+        <div id="h-counter">設定濕度提示數值：<span id="c2"></span></div>
+        <button onclick="in2()">增加</button>
+        <button onclick="de2()">減少</button>
+        <button onclick="back5()">返回</button>
+    </div>
+    <!---------->
         <script src="script.js"></script>
 </body>
 </html>
