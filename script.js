@@ -17,7 +17,7 @@ const database = firebase.database();
 
 const loadRef = database.ref('upload');
 const AIRef = database.ref('AI');
-const petRef = database.ref('pet');
+const petRef = database.ref('step_counter');
 
 // DOM 元素
 const temE = document.getElementById("tem");
@@ -26,15 +26,15 @@ const humE = document.getElementById("hum");
 const htrE = document.getElementById("htr");
 const oxE = document.getElementById("ox");
 const runE = document.getElementById("run");
-const AIE = document.getElementById("AIE"); // 修改為正確的 ID
-const barkE = document.getElementById("bark"); // 修改為正確的 ID
-const bark2E = document.getElementById("bark2"); // 修改為正確的 ID
-const sitE = document.getElementById("sit"); // 修改為正確的 ID
-const sit2E = document.getElementById("sit2"); // 修改為正確的 ID
-const sleepE = document.getElementById("sleep"); // 修改為正確的 ID
-const sleep2E = document.getElementById("sleep2"); // 修改為正確的 ID
-const standE = document.getElementById("stand"); // 修改為正確的 ID
-const stand2E = document.getElementById("stand2"); // 修改為正確的 ID
+const AIE = document.getElementById("AIE"); 
+const barkE = document.getElementById("bark"); 
+const bark2E = document.getElementById("bark2"); 
+const sitE = document.getElementById("sit"); 
+const sit2E = document.getElementById("sit2"); 
+const sleepE = document.getElementById("sleep"); 
+const sleep2E = document.getElementById("sleep2"); 
+const standE = document.getElementById("stand"); 
+const stand2E = document.getElementById("stand2"); 
 
 // 即時數據抓取
 loadRef.on('value', function(snapshot) {
@@ -46,9 +46,7 @@ loadRef.on('value', function(snapshot) {
 
 petRef.on('value', function(snapshot) {
   const data = snapshot.val();
-  htrE.innerText = data['heartbeat'];  // 更新血氧
-  oxE.innerText = data['bloodO2'];     // 更新心跳
-  runE.innerText = data['walk'];
+  runE.innerText = data['steps'];
 });
 
 AIRef.on('value', function(snapshot) {
@@ -123,12 +121,12 @@ function decreaseTouchfoodCount() {
     console.log("Touchfood count already at 0. Cannot decrease further.");
   }
 }
-// 将值1上传到 Firebase 的 writein/realtimefeed 路径
+// 將值1上傳到 Firebase 的 writein/realtimefeed 路徑
 function feeding() {
-  // 直接将数据上传到 Firebase 的 writein/realtimefeed 路径
+  //直接上傳到 Firebase 的 writein/realtimefeed 路徑
   database.ref('writein/realtimefeed').set(1);
 }
-// 从 Firebase 加载数据并更新 touchfood 的显示
+// 從 Firebase 載入資料並更新 touchfood 的顯示
 updateDisplay('pthfc', 'writein/touchfood-w');
 
   // 監聽值的變化並更新到畫面
@@ -321,8 +319,9 @@ function showWarning(warningId) {
   document.getElementById(warningId).style.display = 'block';
 }
 
-// 在 checkWarnings 函数中调用 showWarning 函数来显示警告
-// 定义定时器的时间间隔（以毫秒为单位，这里设置为每隔10秒检查一次）
+
+// 在 checkWarnings 函數中呼叫 showWarning 函數以顯示警告
+// 定義計時器的時間間隔（以毫秒為單位，這裡設定為每隔10秒檢查一次）
 var intervalTime = 7500; // 10秒
 
 // 定时调用 checkWarnings() 函数
@@ -333,40 +332,40 @@ function showWarning(warningId) {
     document.getElementById(warningId).style.display = 'block';
 }
 
-// 在 checkWarnings 函数中调用 showWarning 函数来显示警告
-// 定义延迟时间（以毫秒为单位）
-var delayTime = 15000; // 1秒
+// 在 checkWarnings 函數中呼叫 showWarning 函數以顯示警告
+// 定義計時器的時間間隔（以毫秒為單位）
+var delayTime = 1500; 
 
 // 定时调用 checkWarnings() 函数
 setInterval(checkWarnings, intervalTime);
 
-// 显示警告的函数（带有延迟）
+//顯示警告的函數（帶有延遲）
 function showWarningWithDelay(warningId) {
   setTimeout(function() {
       document.getElementById(warningId).style.display = 'block';
   }, delayTime);
 }
 
-// 在 checkWarnings 函数中调用 showWarningWithDelay 函数来显示警告（带有延迟）
+// 在 checkWarnings 函數調用 showWarningWithDelay 函數來顯示警告
 function checkWarnings() {
-  // 获取c1、c2和c3的值
+  // 獲取c1、c2和c3的值
   var c1Value = c1;
   var c2Value = c2;
   var c3Value = c3;
 
-  // 获取fd、tem和hum的值
+  // 獲取fd、tem和hum的值
   var fdValue = parseFloat(fdElement.innerText);
   var temValue = parseFloat(temElement.innerText);
   var humValue = parseFloat(humElement.innerText);
 
-  // 先检查溫度警告
+  // 先檢查溫度警告
   if (temValue > c1Value) {
       showWarningWithDelay('溫度警告');
   } else {
       document.getElementById('溫度警告').style.display = 'none';
   }
 
-  // 检查濕度警告，延迟显示
+  // 檢查濕度警告
   if (humValue > c2Value) {
       setTimeout(function() {
           showWarningWithDelay('濕度警告');
@@ -375,26 +374,24 @@ function checkWarnings() {
       document.getElementById('濕度警告').style.display = 'none';
   }
 
-  // 最后检查食物警告，延迟显示
-  if ( c3Value > fdValue ) {
+  // 食物警告
+  if ( c3Value == fdValue ) 
+    {
       setTimeout(function() {
           showWarningWithDelay('食物警告');
-      }, delayTime*1.5 ); // 延迟两倍的时间
-  } else {
+      }, delayTime*1.5 ); 
+    } 
+      else 
+      {
       document.getElementById('食物警告').style.display = 'none';
-  }
+      }
 }
 
-// 页面加载时立即执行一次检查
+
+// 在頁面加載時立即執行一次檢查
 checkWarnings();
 
-// 定时调用 checkWarnings() 函数
-setInterval(checkWarnings, intervalTime);
-
-// 页面加载时立即执行一次检查
-checkWarnings();
-
-// 定时调用 checkWarnings() 函数
+// 定時調用 checkWarnings() 函數
 setInterval(checkWarnings, intervalTime);
 //-------------------------------------------------------------------
 //查詢
