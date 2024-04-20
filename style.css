@@ -119,10 +119,8 @@ h3 {
     content: '%'; /* 添加百分号内容 */
     font-size: 12px; /* 设置百分号的字体大小 */
     vertical-align: super; /* 垂直对齐到数字的上方 */
-    margin-left: 3px; /* 设置百分号与数字之间的间距 */
+    margin-left: 32px; /* 设置百分号与数字之间的间距 */
 }
-
-
 
 /* 健康區段樣式 */
 .healthy {
@@ -131,11 +129,6 @@ h3 {
     align-items: center;
     justify-content: space-around;
     height: 25vh;
-}
-
-.label {
-    font-weight: bold;
-    margin-right: 5px; /* 調整標籤之間的間距 */
 }
 
 .ai {
@@ -311,4 +304,9 @@ p7 {
     left: calc(35% - 51px); /* 40px × 2 */
     top: 70%;
     transform: scale(1.1);
+
+}
+#fdsetp {
+    transform: scale(1.5); /* 放大1.5倍 */
+        transform-origin: center; /* 以中心為基準點 */
 }
