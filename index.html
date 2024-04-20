@@ -132,14 +132,17 @@
         <span id="sleep"></span>
         <span id="stag">&nbsp;&nbsp;&nbsp;一天總共時間為</span>
         <span id="sleep2"></span><br>
-        <span id="stah">(睡)當前保持多久</span>
+        <span id="stah">(站)當前保持多久</span>
         <span id="stand"></span>
         <span id="stag">&nbsp;&nbsp;&nbsp;一天總共時間為</span>
         <span id="stand2"></span><br>
         <button id="button15" onclick="back3()">切回環境</button>
-        <form id="urlForm" onsubmit="return submitForm()">
-            <label for="urlInput">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp貼上即可查看寵物：</label>
-            <input type="text" id="urlInput" name="urlInput" required>
+        <div>
+    <label for="urlInput">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp貼上即可查看寵物：</label>
+    <input type="text" id="urlInput" name="urlInput" required>
+    <button onclick="submitForm()">跳轉</button> <!-- 新增按鈕 -->
+</div>
+
     </div>
     <!---------->
     <div id="fdsetp" style="display: none;">
