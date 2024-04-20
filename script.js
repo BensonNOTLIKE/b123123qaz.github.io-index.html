@@ -79,22 +79,16 @@ AIRef.on('value', function(snapshot) {
     // 顯示動作和時間
     AIE.innerText = `${actionRealtime} (${time})`;  // 更新中文結果
   } else {
-    AIE.innerText = actionRealtime; // 若未匹配到，則保持原始值
+    AIE.innerText = actionRealtime; 
   }
 });
 
-// 函数用于更新特定元素的值和数据库中的值
 function updateCounter(elementId, databaseRefPath, value) {
   const element = document.getElementById(elementId);
-
-  // 更新页面显示
   element.innerText = value;
-
-  // 将新值上传到 Firebase
   database.ref(databaseRefPath).set(value);
 }
 
-// 函数用于从 Firebase 加载数据并更新元素显示
 function updateDisplay(elementId, databaseRefPath) {
   const element = document.getElementById(elementId);
   const ref = database.ref(databaseRefPath);
@@ -104,7 +98,6 @@ function updateDisplay(elementId, databaseRefPath) {
     element.innerText = data || 0;
   });
 }
-
 
 // 更新 touchfood 的值，並上傳到 Firebase
 function increaseTouchfoodCount() {
@@ -117,7 +110,7 @@ function decreaseTouchfoodCount() {
   if (currentCount > 0) {
     updateCounter('pthfc', 'writein/touchfood-w', currentCount - 1);
   } else {
-    // 如果当前计数已经为0，则不执行减少操作
+// 如果目前計數已經為0，則不執行減少操作
     console.log("Touchfood count already at 0. Cannot decrease further.");
   }
 }
@@ -154,7 +147,6 @@ updateDisplay('pthfc', 'writein/touchfood-w');
                 });
         }
     });
-    
     // 添加Firebase值的監聽器
     firebase.database().ref(firebasePath).on('value', (snapshot) => {
         const value = snapshot.val();
@@ -270,42 +262,42 @@ function uploadC3ToFirebase() {
 function in1() {
     c1++;
     document.getElementById('c1').innerText = c1 + " °C";
-    uploadC1ToFirebase(); // 写入到 Firebase
+    uploadC1ToFirebase(); // 寫入 Firebase
     checkWarnings();
 }
 
 function de1() {
     c1--;
     document.getElementById('c1').innerText = c1 + " °C";
-    uploadC1ToFirebase(); // 写入到 Firebase
+    uploadC1ToFirebase(); // 寫入 Firebase
     checkWarnings();
 }
 
 function in2() {
     c2++;
     document.getElementById('c2').innerText = c2 + " %";
-    uploadC2ToFirebase(); // 写入到 Firebase
+    uploadC2ToFirebase(); // 寫入 Firebase
     checkWarnings();
 }
 
 function de2() {
     c2--;
     document.getElementById('c2').innerText = c2 + " %";
-    uploadC2ToFirebase(); // 写入到 Firebase
+    uploadC2ToFirebase(); // 寫入 Firebase
     checkWarnings();
 }
 
 function in3() {
     c3++;
     document.getElementById('c3').innerText = c3 + " %";
-    uploadC3ToFirebase(); // 写入到 Firebase
+    uploadC3ToFirebase(); // 寫入 Firebase
     checkWarnings();
 }
 
 function de3() {
     c3--;
     document.getElementById('c3').innerText = c3 + " %";
-    uploadC3ToFirebase(); // 写入到 Firebase
+    uploadC3ToFirebase(); // 寫入 Firebase
     checkWarnings();
 }
 //------
@@ -481,11 +473,11 @@ historyRef.once('value')
 function submitForm() {
   var url = document.getElementById("urlInput").value;
   if (url.trim() !== "") {
-    window.location.href = url;
-    return false;
+    window.open(url); // 在新視窗中打開網址
   }
-  return false; // 防止表单提交
 }
+
+
 // 登入頁面
 function showLoginPage() {
   document.getElementById("page1").style.display = "none";
